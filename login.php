@@ -23,6 +23,12 @@ if ($numero_dnis > 0) {
     //RESULTADO DE LA QUERY CON UN BUCLE FOR POR EJEMPLO.
     if ($usuario_clave == $password) {
         require 'menu_inicio.php';
+        //Creamos una variable de sesion para poder tener acceso desde todas las páginas
+        session_start();
+        $_SESSION['DNI'] = $DNI;
+        $_SESSION['Nombre'] = $r['Nombre'];
+        $_SESSION['Email'] = $r['Email'];
+        
     } else {
         require 'mensaje_error.php';
     }
