@@ -7,8 +7,8 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <style>
         body {
-                background: black;
-                background-image: url("img/tile2.png");
+                /*background: black;*/
+                /*background-image: url("img/tile2.png");*/
                 
                 
             }

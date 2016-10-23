@@ -17,22 +17,29 @@ if ($numero_dnis > 0) {
     $r = $resultado_consulta->fetch_array();
     $DNI = $r['DNI'];
     $password = $r['password'];
+    $tipo = $r['Tipo'];
 
     //COMO SOLO PUEDE HABER COMO MUCHO UN DNI CON ESTE RESULTADO PORQUE EL DNI ES
     //CAMPO CLAVE Y NO SE PUEDE REPETIR LO PONGO CON UN IF; SI NO, SE TIENE QUE TRATAR TODO 
     //RESULTADO DE LA QUERY CON UN BUCLE FOR POR EJEMPLO.
     if ($usuario_clave == $password) {
-        require 'menu_inicio.php';
+        
         //Creamos una variable de sesion para poder tener acceso desde todas las páginas
         session_start();
         $_SESSION['DNI'] = $DNI;
         $_SESSION['Nombre'] = $r['Nombre'];
-        $_SESSION['Email'] = $r['Email'];
+        $_SESSION['Email'] = $r['email'];
         
+        if ($tipo == 1){
+        require 'profesor.php';
+        }
+        else{
+            require 'menu_inicio.php';
+        }
     } else {
         require 'mensaje_error.php';
     }
 } else {
-    require 'mensaje_eror.php';
+    require 'mensaje_error.php';
 }
 ?>

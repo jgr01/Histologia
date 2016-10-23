@@ -15,11 +15,11 @@ $nombre = $_SESSION['Nombre'];
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Histología</a>
+          <a class="navbar-brand" href="#">Bienvenido Alumno</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#"><?php echo $nombre;?></a></li>
+            <li class="active"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
             <li class="dropdown">
@@ -42,3 +42,38 @@ $nombre = $_SESSION['Nombre'];
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+<div class="container">
+<?php
+//ejemplo de volcado de una query a un array en php
+//creo el array, hago la consulta a la base de datos
+$usuarios = array();
+$consulta_usuarios = $mysqli -> query ("select * from usuario");
+//saco el numero de usuarios que hay en la bbdd
+$num_usuarios = $consulta_usuarios -> num_rows;
+
+for ($i = 0; $i < $num_usuarios; $i++){
+    $r = $consulta_usuarios -> fetch_array();
+    $usuarios[$i][0] = $r['DNI']; 
+    $usuarios[$i][1] = $r['Nombre'];
+    $usuarios[$i][2] = $r['Apellido'];
+    $usuarios[$i][3] = $r['email'];
+}
+
+//ahora voy a usar los datos en un ejemplo
+
+?>
+
+<table class="table table-condensed table-bordered" style="background-color: white">
+    <?php 
+    for ($i = 0; $i < $num_usuarios; $i++){
+        echo '<tr>';
+        echo '<td>'.$usuarios[$i][1].'</td>';
+        echo '<td>'.$usuarios[$i][2].'</td>';
+        echo '<td>'.$usuarios[$i][3].'</td>';
+        echo '<td><img src = "imagenes/'.$usuarios[$i][0].'.jpg"></td>';
+        
+}
+?>
+
+</table>
+    </div>
